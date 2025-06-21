@@ -6,7 +6,8 @@ import (
 )
 
 func main() {
-	rate, err := api.GetRate("BTC")
-
-	fmt.Println(rate.Price, err)
+	rate, err := api.GetRate("ETH")
+	if err == nil {
+		fmt.Printf("The rate for %v is %.2f \n", rate.Currency, rate.Price)
+	}
 }
