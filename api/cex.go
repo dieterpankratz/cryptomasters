@@ -2,6 +2,7 @@ package api
 
 import (
 	"dpan/cryptomasters/datatypes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -21,9 +22,12 @@ func GetRate(currency string) (*datatypes.Rate, error) {
 		if err != nil {
 			return nil, err
 		}
+		var cryptorate datatypes.Rate
+		err = json.Unmarshal(bodyBytes, &cryptorate)
+		if err != nil {
+			return nil, err
+		}
 
-		json := string(bodyBytes)
-		fmt.Println(json)
 	} else {
 		return nil, fmt.Errorf("status code received: %v", res.StatusCode)
 	}
